@@ -1,0 +1,40 @@
+body,div,ul,li,p,dl,dt,dd,h1,h2{
+	margin: 0px;
+	padding: 0px;
+}
+.clearfix:before,.clearfix:after{
+	content: "";
+	clear: both;
+	display: block;
+}
+a{	text-decoration: none;}
+
+ul{	list-style: none;}
+
+html,body{
+	width: 900px;
+	margin: 0 auto;
+}
+
+.clearfix:before,.clearfix:after{
+	display: block;
+	content: "";
+	clear: both;
+}
+header{
+	height: 59px;
+	width: 100%;
+	background: url(../img/logo1.jpg) repeat;	
+}
+header>.head-left{
+	float: left;
+	width: 557px;
+}
+header>.head-right{
+	float: right;
+	width: 330px;
+	line-height: 59px;
+}
+#current_date,#current_time{
+	background-color: #fff;
+}

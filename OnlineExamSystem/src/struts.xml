@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="" extends="struts-default">
+	    <!-- 王振雄 -->
+		<action name="startexam" class="com.cool.john.action.StartExamAction"  method="getExam">
+			<result name="success">/exam.jsp</result>
+		</action>
+		<action name="insertstudentqa" class="com.cool.john.action.InsertStudentqaAction" method="insertstudentqa" >
+		</action>
+		
+		<action name="run" class="com.cool.john.action.ScoreAction" method="run" >
+		</action>
+		
+		<action name="login" class="com.cool.john.action.LoginAction">
+			<result name="success_superManager">/admin.html</result>
+			<result name="success_teacher">/teacher.jsp</result>
+			<result name="success_student">/student.jsp</result>
+          <!-- exception result -->
+			<exception-mapping result="ERROR"
+				exception="com.exception.Myexception" />
+			<result name="error">/error.jsp</result>
+			<!-- validation result -->
+			<result name="input">/login.jsp</result>
+		</action>
+		<action name="getTestList" class="com.cool.john.action.TestListAction" method="getTestList"></action>
+		<action name="checkScore" class="com.cool.john.action.ScoreListAction" method="getScoreList"></action>
+		<action name="findTest" class="com.cool.john.action.FindTestAction" method="findTest"></action>
+		<action name="findScore" class="com.cool.john.action.FindScoreAction" method="findScore"></action>
+		<action name="stuInfo" class="com.cool.john.action.StundetInfoAction" method="stuInfo"></action>
+			
+		<action name="adminmodify" class="com.cool.john.action.AdminAction" method="update"></action>
+		
+		 <action name="getstudents" class="com.cool.john.action.StundetInfoAction" method="getUsers"></action>
+        <action name="getstudent" class="com.cool.john.action.StundetInfoAction" method="jiansuo"></action>  
+        <action name="addstudent" class="com.cool.john.action.StundetInfoAction" method="insert"></action>
+        <action name="updatestudent" class="com.cool.john.action.StundetInfoAction" method="update"></action>
+		
+		<action name="getteachers" class="com.cool.john.action.TeacherAction" method="getTeachers"></action>
+          <action name="getteacher" class="com.cool.john.action.TeacherAction" method="jiansuo"></action>
+        <action name="addteacher" class="com.cool.john.action.TeacherAction" method="insert"></action>
+        <action name="updateteacher" class="com.cool.john.action.TeacherAction" method="update"></action>
+        
+        <action name="getexamtimes" class="com.cool.john.action.TestListAction" method="getExamtimes"></action>
+          <action name="getexamtime" class="com.cool.john.action.TestListAction" method="jiansuo"></action>
+        <action name="addexamtime" class="com.cool.john.action.TestListAction" method="insert"></action>   
+        <action name="updateexamtime" class="com.cool.john.action.TestListAction" method="update"></action>
+        
+		<action name="exampaper" class="com.cool.john.action.ExampaperAction" method="Exampaper" >
+			<result name="input">/teacher.jsp</result>
+		</action>		
+		<action name="gaimi" class="com.cool.john.action.TeacherAction" method="changepassword" >
+			<result name="input">/teacher.jsp</result>
+		</action>		
+		<action name="geren" class="com.cool.john.action.TeacherAction" method="geren" >
+			<result name="input">/teacher.jsp</result>
+		</action>		
+		<action name="choice" class="com.cool.john.action.ChoiceAction" method="choice" >
+			<result name="input">/teacher.jsp</result>
+		</action>		
+		<action name="tiankong" class="com.cool.john.action.TiankongAction" method="tiankong" >
+			<result name="input">/teacher.jsp</result>
+		</action>		
+		<action name="wenda" class="com.cool.john.action.WendaAction" method="wenda" >
+			<result name="input">/teacher.jsp</result>
+		</action>		
+		<action name="chaxuan" class="com.cool.john.action.ChoiceAction" method="chaxuan" >
+			<result name="input">/teacher.jsp</result>
+		</action>		
+		<action name="chatian" class="com.cool.john.action.TiankongAction" method="chatian" >
+			<result name="input">/teacher.jsp</result>
+		</action>	
+		<action name="chawen" class="com.cool.john.action.WendaAction" method="chawen" >
+			<result name="input">/teacher.jsp</result>
+		</action>
+		<action name="studentqa" class="com.cool.john.action.StudentqaAction" method="studentqa" >
+			<result name="input">/teacher.jsp</result>
+		</action>
+	</package>
+</struts>

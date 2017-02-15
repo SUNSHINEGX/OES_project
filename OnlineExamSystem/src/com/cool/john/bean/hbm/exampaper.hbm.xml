@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="com.cool.john.bean.Exampaper" table="exampaper_list">
+	    <id name="subject" column="subject">
+		</id>
+		<property name="EasySelNum" column="EasySelNum"/>
+		<property name="HardSelNum" column="HardSelNum"/>
+		<property name="SelScore" column="SelScore"/>
+		<property name="EasyFillNum" column="EasyFillNum"/>
+		<property name="HardFillNum" column="HardFillNum"/>
+		<property name="FillScore" column="FillScore"/>
+		<property name="EasyQaNum" column="EasyQaNum"/>
+		<property name="HardQaNum" column="HardQaNum"/>
+		<property name="QaSocre" column="QaSocre"/>
+	</class>
+</hibernate-mapping>

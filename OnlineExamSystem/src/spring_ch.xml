@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<!-- 持久层配置 -->
+	<bean id="choiceDao" class="com.cool.john.dao.ChoiceDao">
+		<property name="hibernateTemplate">
+			<ref bean="hibernateTemplate" />
+		</property>
+	</bean>
+
+	<!-- 业务逻辑层配置 -->
+	<bean id="choiceService" class="com.cool.john.service.ChoiceService">
+		<property name="choiceDao">
+			<ref bean="choiceDao" />
+		</property>
+	</bean>
+	<!-- 代理类的配置 -->
+	<bean id="choiceServiceProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="choiceService" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+</beans> 

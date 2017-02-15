@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="com.cool.john.bean.Tiankong" table="tiankong_list">
+		<id name="id" column="id">
+		    <generator class="increment"/>
+		</id>
+		<property name="subject" column="subject"/>
+		<property name="FillTop" column="FillTop"/>
+		<property name="answer" column="answer"/>
+		<property name="level" column="level"/>
+	</class>
+</hibernate-mapping>

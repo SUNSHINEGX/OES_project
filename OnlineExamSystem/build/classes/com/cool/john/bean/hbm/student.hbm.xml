@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+<class name="com.cool.john.bean.Student" table="student_list">
+<id name="stuNum"  column="stuNum">
+<!-- <generator>表示一个主键的生成机制  即具体通过何种方式来生成。
+increment：生成long, short或者int类型的主键，不能在cluster环境下使用。
+适用于所有数据库-->
+</id>
+<property name="stuName" column="stuName" />
+<property name="password" column="password" /><!-- 属性名与列名映射-->
+<property name="sex" column="sex" />
+<property name="department" column="department" />
+<property name="major" column="major" />
+<property name="classNum" column="class" />
+</class>
+</hibernate-mapping>
