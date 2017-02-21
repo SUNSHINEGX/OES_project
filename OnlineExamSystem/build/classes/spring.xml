@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!-- 数据库信息的配置 -->
+	<import resource="spring_el.xml"/>
+	<import resource="spring_ch.xml"/>
+	<import resource="spring_ti.xml"/>
+	<import resource="spring_we.xml"/>
+	<import resource="spring-score.xml"/>
+	<import resource="spring-user.xml"/>
+	<import resource="spring-exampaper.xml"/>
+    <import resource="spring-teacher.xml"/>
+    <import resource="spring-choice.xml"/>
+    <import resource="spring-tiankong.xml"/>
+    <import resource="spring-wenda.xml"/>
+    <import resource="spring-studentqa.xml"/>
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:mysql://localhost:3306/exam</value>
+		</property>
+		<property name="username">
+			<value>root</value>
+		</property>
+		<property name="password">
+			<value></value>
+		</property>
+	</bean>
+	<!-- 接管了hibernate的sessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>./com/cool/john/bean/hbm/exampaper.hbm.xml</value>
+				<value>./com/cool/john/bean/hbm/choice.hbm.xml</value>
+				<value>./com/cool/john/bean/hbm/tiankong.hbm.xml</value>
+				<value>./com/cool/john/bean/hbm/wenda.hbm.xml</value>
+				<value>./com/cool/john/bean/hbm/score.hbm.xml</value>
+				<value>./com/cool/john/bean/hbm/student.hbm.xml</value>
+				<value>./com/cool/john/bean/hbm/teacher.hbm.xml</value>
+				<value>./com/cool/john/bean/hbm/admin.hbm.xml</value>
+				<value>./com/cool/john/bean/hbm/testpaper.hbm.xml</value>
+				<value>./com/cool/john/bean/hbm/score_list.hbm.xml</value>
+				<value>./com/cool/john/bean/hbm/studentqa.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+			    <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 事务配置 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<constructor-arg index="0">
+			<ref bean="sessionFactory" />
+		</constructor-arg>
+	</bean>
+</beans> 

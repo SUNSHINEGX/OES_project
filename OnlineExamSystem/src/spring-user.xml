@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    
+<!-- Student服务配置 -->
+<!-- 持久层配置 -->
+	<bean id="stuDao" class="com.cool.john.dao.StudentDao">
+		<property name="hibernateTemplate">
+			<ref bean="hibernateTemplate" />
+		</property>
+	</bean>
+
+	<!-- 业务逻辑层配置 -->
+	<bean id="stuService" class="com.cool.john.service.StudentService">
+		<property name="stuDao">
+			<ref bean="stuDao" />
+		</property>
+	</bean>
+<!-- 代理类的配置 -->
+	<bean id="stuServiceProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="stuService" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+<!-- teacher服务配置 -->
+<!-- 持久层配置 -->
+	<bean id="teacherDao" class="com.cool.john.dao.TeacherDao">
+		<property name="hibernateTemplate">
+			<ref bean="hibernateTemplate" />
+		</property>
+	</bean>
+
+	<!-- 业务逻辑层配置 -->
+	<bean id="teacherService" class="com.cool.john.service.TeacherService">
+		<property name="teacherDao">
+			<ref bean="teacherDao" />
+		</property>
+	</bean>
+<!-- 代理类的配置 -->
+	<bean id="teaServiceProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="teacherService" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- Admin服务配置 -->
+	<!-- 持久层配置 -->
+	<bean id="admDao" class="com.cool.john.dao.AdminDao">
+		<property name="hibernateTemplate">
+			<ref bean="hibernateTemplate" />
+		</property>
+	</bean>
+
+	<!-- 业务逻辑层配置 -->
+	<bean id="admService" class="com.cool.john.service.AdminService">
+		<property name="admDao">
+			<ref bean="admDao" />
+		</property>
+	</bean>
+<!-- 代理类的配置 -->
+	<bean id="admServiceProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="admService" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- TestPaperList服务配置 -->
+	<!-- 持久层配置 -->
+	<bean id="tpDao" class="com.cool.john.dao.TestPaperListDao">
+		<property name="hibernateTemplate">
+			<ref bean="hibernateTemplate" />
+		</property>
+	</bean>
+
+	<!-- 业务逻辑层配置 -->
+	<bean id="tpService" class="com.cool.john.service.TestPaperListService">
+		<property name="tpDao">
+			<ref bean="tpDao" />
+		</property>
+	</bean>
+<!-- 代理类的配置 -->
+	<bean id="tpServiceProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="tpService" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- ScoreList服务配置 -->
+		<!-- 持久层配置 -->
+	<bean id="slDao" class="com.cool.john.dao.ScoreListDao">
+		<property name="hibernateTemplate">
+			<ref bean="hibernateTemplate" />
+		</property>
+	</bean>
+
+	<!-- 业务逻辑层配置 -->
+	<bean id="slService" class="com.cool.john.service.ScoreListService">
+		<property name="slDao">
+			<ref bean="slDao" />
+		</property>
+	</bean>
+<!-- 代理类的配置 -->
+	<bean id="slServiceProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="slService" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	
+</beans>

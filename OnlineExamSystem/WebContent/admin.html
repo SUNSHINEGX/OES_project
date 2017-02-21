@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/header_common.css"/>
+		<link rel="stylesheet" type="text/css" href="css/admin.css"/>
+	
+	</head>
+	<body>
+		<header class="clearfix">
+				<div class="head-left">
+					<img src="img/logo.gif" alt="" />
+				</div>
+				<div class="head-right">
+					<span id="current_date"></span>
+					<span id="current_time"></span>
+				</div>
+		</header>
+		<section class="clearfix">
+			<div class="content-left">
+				<div class="admin-info">
+					<img src="img/ico02.gif"/>
+					<span id="">
+						您好，<b>管理者</b>
+					</span>
+					<a href="login.jsp">[ 退出  ]</a>
+				</div>
+				
+				<ul>
+					<li>
+						<div id="student" class="choice">
+							<img class="shanjiao" src="img/ico03.gif"/>
+							学生管理
+						</div>
+						<ol class="xiala">
+							<li class="li-tag">
+								<img src="img/ico05.gif"/>
+								学生检索
+							</li>
+							<li class="li-tag">
+								<img src="img/ico06.gif"/>
+								添加修改
+							</li>
+							<li class="li-tag">
+								<img src="img/ico06.gif"/>
+								成绩查询
+							</li>
+						</ol>
+					</li>
+					<li>
+						<div id="teacher" class="choice">
+							<img class="shanjiao" src="img/ico03.gif"/>
+							教师管理
+						</div>
+						<ol class="xiala">
+							<li class="li-tag">
+								<img src="img/ico06.gif"/>
+								教务检索
+							</li>
+							<li class="li-tag">
+								<img src="img/ico06.gif"/>
+								添加修改
+							</li>
+						</ol>
+					</li>
+					<li>
+						<div id="exam" class="choice">
+							<img class="shanjiao" src="img/ico03.gif"/>
+							考试安排
+						</div>
+						<ol class="xiala">
+							<li class="li-tag">
+								<img src="img/ico06.gif"/>
+								考试科目
+							</li>
+							<li class="li-tag">
+								<img src="img/ico06.gif"/>
+								添加修改
+							</li>
+						</ol>
+					</li>
+					<li>
+						<div id="person" class="choice">
+							<img class="shanjiao" src="img/ico03.gif"/>
+							个人中心
+						</div>
+						<ol class="xiala">
+							<li class="li-tag">
+								<img src="img/ico06.gif"/>
+								密码修改
+							</li>
+						</ol>
+					</li>
+				</ul>
+			</div>
+			<div class="content-right">
+				<!--学生检索-->
+				<div class="gongneng">
+					<h5 id='gongneng-title'>学生检索</h5>
+					<form method="post" id="form1">
+						<p>
+							<img src="img/ico07.gif"/>
+							<input name="student.stuNum" type="text" placeholder="请输入学号"/>
+							<input id="studentjiansuo" type="button" value="搜索"  />
+						</p>
+					</form>
+					
+					<div class="gongneng-content" id="student-info">
+						
+					</div>
+				</div>
+				<!--学生添加修改-->
+				<div class="gongneng">
+					<h5 id='gongneng-title'>添加修改</h5>
+					<div class="gongneng-content">
+						<form  method="post"   id="form2">		
+							<ul>
+								<li>
+									<span>学&nbsp;号：</span>
+									<input name="student.stuNum" type="text" />
+								</li>
+								<li>
+									<span>姓&nbsp;名：</span>
+									<input name="student.stuName" type="text" />
+								</li>
+								<li>
+									<span>密&nbsp;码：</span>
+									<input name="student.password" type="text" />
+								</li>
+								<li>
+									<span>性&nbsp;别：</span>
+								    <select name="student.sex">
+										<option>男</option>
+										<option>女</option>
+									</select>
+								</li>
+								<li>
+									<span>院&nbsp;系：</span>
+									<input name="student.department" type="text" />
+								</li>
+								<li>
+									<span>专&nbsp;业：</span>
+									<input name="student.major" type="text" />
+								</li>
+								<li>
+									<span>班&nbsp;级：</span>
+									<input name="student.classNum" type="text" />
+								</li>
+								<li>
+									<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<input id="stu_addclick" type="button" value="添加"/>
+									<input id="stu_updateclick" type="button" value="修改"/>
+									<input type="reset" value="重置"/>
+								</li>
+							</ul>
+						</form>
+					</div>
+				</div>
+				<!--学生成绩查询-->
+				<div class="gongneng">
+					<h5 id='gongneng-title'>成绩查询</h5>
+<!-- 					<form id="form3">	 -->
+<!-- 						<p> -->
+<!-- 							<img src="img/ico07.gif"/> -->
+<!-- 							<input type="text" /> -->
+<!-- 							<input type="button" value="搜索"  /> -->
+<!-- 						</p> -->
+<!-- 					</form>	 -->
+					<div class="gongneng-content" id="student-score">
+						
+					</div>
+				</div>
+				<!--教师检索-->
+				<div class="gongneng">
+					<h5 id='gongneng-title'>教师检索</h5>
+					<form id="form4" method="post">	
+						<p>
+							<img src="img/ico07.gif"/>
+							<input name="teacher.TeaNum" type="text" placeholder="请输入职工号"/>
+							<input id="teacherjiansuo" type="button" value="搜索"  />
+							
+						</p>
+					</form>
+					<div class="gongneng-content" id="teacher-info">
+						
+					</div>
+				</div>
+				<!--教师添加修改-->
+				<div class="gongneng">
+					<h5 id='gongneng-title'>添加修改</h5>
+					<div class="gongneng-content">
+						<form method="post" id="form5">		
+							<ul>
+								<li>
+									<span>职工号：</span>
+									<input name="teacher.TeaNum" type="text" />
+								</li>
+								<li>
+									<span>姓&nbsp;名：</span>
+									<input name="teacher.TeaName" type="text" />
+								</li>
+								<li>
+									<span>密&nbsp;码：</span>
+									<input name="teacher.password" type="text" />
+								</li>
+								
+								<li>
+									<span>院&nbsp;系：</span>
+									<input name="teacher.department" type="text" />
+								</li>
+								<li>
+									<span>科&nbsp;目：</span>
+									<input name="teacher.subject" type="text" />
+								</li>
+								<li>
+									<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<input id="tea_addclick" type="button" value="添加"/>
+									<input id="tea_updateclick" type="button" value="修改"/>
+									<input type="reset" value="重置"/>
+								</li>
+							</ul>
+						</form>
+					</div>
+				</div>
+				<!--考试科目-->
+				<!--教师检索-->
+				<div class="gongneng">
+					<h5 id='gongneng-title'>考试科目</h5>
+					<form id="form6" method="post">
+						<p>
+							<img src="img/ico07.gif"/>
+							<input name="testPaperList.subject" type="text" placeholder="请输入科目名"/>
+							<input id="examjiansuo" type="button" value="搜索"  />
+							
+						</p>
+					</form>
+					<div class="gongneng-content" id="examtime-info">
+						
+					</div>
+				</div>
+				<!--考试科目添加修改-->
+				<div class="gongneng">
+					<h5 id='gongneng-title'>添加修改</h5>
+					<div class="gongneng-content">
+						<form  method="post" id="form7">		
+							<ul>
+								<li>
+									<span>科目名：&nbsp;</span>
+									<input name="testPaperList.subject" type="text" />
+								</li>
+								<li>
+									<span>考试时长：</span>
+									<input name="testPaperList.examTime" type="text" />
+								</li>
+								<li>
+									<span>考试日期：</span>
+									<input name="testPaperList.examDate" type="date" />
+								</li>
+								
+								<li>
+									<span>开始时间：</span>
+									<input name="testPaperList.beginTime" type="time" />
+								</li>
+								<li>
+									<span>结束时间：</span>
+									<input name="testPaperList.endTime" type="time" />
+								</li>
+								<li>
+									<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<input id="addexamtime" type="button" value="添加"/>
+									<input id="updateexamtime" type="button" value="修改"/>
+									<input type="reset" value="重置"/>
+								</li>
+							</ul>
+						</form>
+					</div>
+				</div>
+				
+				<!--密码修改-->
+				<div class="gongneng">
+					<h5 id='gongneng-title'>密码修改</h5>
+					<div class="gongneng-content">
+						<form id="form8" method="post">		
+							<ul>
+								<li>
+									<span>新密码：</span>
+									<input name="admin.password" type="password" />
+								</li>
+								<li>
+									<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									<input id="adminmodify" type="button" value="修改"/>
+								</li>
+							</ul>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+		<script src="js/jquery-1.8.3.js"></script>
+		<script src="js/admin.js"></script>
+		<script>
+			
+			
+		</script>
+	</body>
+</html>

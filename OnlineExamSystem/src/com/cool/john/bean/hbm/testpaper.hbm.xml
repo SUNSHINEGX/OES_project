@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+<class name="com.cool.john.bean.TestPaperList" table="examtime_list">
+<id name="subject"  column="subject">
+<!-- <generator>表示一个主键的生成机制  即具体通过何种方式来生成。
+increment：生成long, short或者int类型的主键，不能在cluster环境下使用。
+适用于所有数据库-->
+</id>
+<!-- 属性名与列名映射-->
+<property name="examTime" column="ExamTime" />
+<property name="examDate" column="ExamDate" />
+<property name="beginTime" column="begin" />
+<property name="endTime" column="end" />
+</class>
+</hibernate-mapping>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping SYSTEM "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+	<class name="com.cool.john.bean.Score" table="score_list">
+		<id name="ScoreID" column="exam_id">
+		    <generator class="increment"/>
+		</id>
+		<property name="StuNum" column="StuNum"/>
+		<property name="StuName" column="StuName"/>
+		<property name="subject" column="subject"/>
+		<property name="classNo" column="class"/>
+		<property name="SelScore" column="SelScore"/>
+		<property name="FillScore" column="FillScore"/>
+		<property name="QaScore" column="QaScore"/>
+		<property name="Total" column="Total"/>
+		<property name="address" column="address"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<!-- 持久层配置 -->
+	<bean id="tiankongDao" class="com.cool.john.dao.TiankongDao">
+		<property name="hibernateTemplate">
+			<ref bean="hibernateTemplate" />
+		</property>
+	</bean>
+
+	<!-- 业务逻辑层配置 -->
+	<bean id="tiankongService" class="com.cool.john.service.TiankongService">
+		<property name="tiankongDao">
+			<ref bean="tiankongDao" />
+		</property>
+	</bean>
+	<!-- 代理类的配置 -->
+	<bean id="tiankongServiceProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="tiankongService" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+</beans> 
