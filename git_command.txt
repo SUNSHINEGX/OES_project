@@ -1,0 +1,21 @@
+1.切换远程仓库
+
+    先保证本地代码是最新代码
+
+    $ git pull -r
+
+    修改远程仓库地址
+
+    $ git remote set-url origin https://github.com/qyf404/box.git
+
+    其中https://github.com/qyf404/box.git是新的远程仓库的地址.
+
+    推送代码到新仓库
+
+    $ git push -u origin master
+2.强制上传至远程仓库
+    git push -f
+
+
+
+
