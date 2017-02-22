@@ -23,5 +23,9 @@
 	http://www.cnblogs.com/zuibunan/p/3843241.html
 
 	http://blog.csdn.net/sunweizhong1024/article/details/8055400/
+
 5.git clone用法
-http://classfoo.com/ccby/article/Zqo2bSC
+	http://classfoo.com/ccby/article/Zqo2bSC
+
+
+6. 在git远程仓库的项目中找出项目地址（点击绿色的按钮clone or download ）就会出现一个URL
