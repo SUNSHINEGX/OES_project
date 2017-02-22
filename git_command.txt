@@ -24,7 +24,9 @@
 
 	http://blog.csdn.net/sunweizhong1024/article/details/8055400/
 
-5.git clone用法
+5.git clone用法（git clone 远程仓库地址 本地文件夹地址或者当前目录下的空文件夹）
+		从远程仓库把所有文件或项目全部clone 到本地的文件夹中
+
 	http://classfoo.com/ccby/article/Zqo2bSC
 
 
