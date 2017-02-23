@@ -31,3 +31,8 @@
 
 
 6. 在git远程仓库的项目中找出项目地址（点击绿色的按钮clone or download ）就会出现一个URL
+
+7. 35个性能代码总结
+	http://mp.weixin.qq.com/s/s4T_KVLdKve3QN-Hx6kn2A?1487830409042?ref=myread
+	
+	个人总结：http://www.chinaznyj.com/GuoNeiZiXun/1955.html?ref=myread
