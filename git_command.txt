@@ -36,3 +36,5 @@
 	http://mp.weixin.qq.com/s/s4T_KVLdKve3QN-Hx6kn2A?1487830409042?ref=myread
 	
 	个人总结：http://www.chinaznyj.com/GuoNeiZiXun/1955.html?ref=myread
+8. personal info: login database information(for mysql:mysql -h localhost -u root -p  inputpwd:123456
+						for oracle: sqlplus ,then input username gx pwd 123456)
