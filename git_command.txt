@@ -38,3 +38,8 @@
 	个人总结：http://www.chinaznyj.com/GuoNeiZiXun/1955.html?ref=myread
 8. personal info: login database information(for mysql:mysql -h localhost -u root -p  inputpwd:123456
 						for oracle: sqlplus ,then input username gx pwd 123456)
+
+9.在不同的电脑上实现对同一个github账号的中代码的同步：
+first step:只在C盘这个目录下C:\Users\admin\Documents进行init	(不要在其他盘进行初始化设置。如D盘、E盘。。。)
+second step:执行git init 命令
+and then :git remote add origin git@github.com:xxx/xxx.git git add filename  git push origin master
