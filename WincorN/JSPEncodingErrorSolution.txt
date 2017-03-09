@@ -1,0 +1,62 @@
+response.setCharacterEncoding("UTF-8");目的是用于response.getWriter()输出的字符流的乱码问题。
+response.setContentType("text/html;charset=utf-8");目的是为了控制浏览器的行为，即控制浏览器用UTF-8进行解码；
+<% @  page language="java" pageEncoding="utf-8"%>
+MySQL数据库中文编码转换
+在设定连接数据库URL时指定字符编码，可以确保数据正确的现实在网页上：
+jdbc:mysql://localhost:3306/exam?useUnicode=true&characterEncoding=utf8;
+改Tomcat根目录中conf子目录下的server.xml文件，在中加入URIEncoding="UTF-8"
+
+<Connector connectionTimeout="20000"
+port="8080"
+protocol="HTTP/1.1"
+redirectPort="8443"
+URIEncoding="UTF-8"/>
+
+HTML中文编码转换
+在JSP文件中的静态文字显示乱码，则需要在<head></head>之间增加中文设置代码，如清单附C-5所示。
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+ 使用编码过滤器。创建过滤器类SetCharacterEncoding，源码如清单附C-5所示。
+清单附C-5 SetCharacterEncoding.java
+package chapc;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+publicclass SetCharacterEncoding implements Filter {
+
+@Override
+publicvoid destroy() {
+}
+
+@Override
+publicvoid doFilter(ServletRequest request, ServletResponse response,
+FilterChain chain) throws IOException, ServletException {
+//设置字符编码
+request.setCharacterEncoding("UTF-8");
+//将控制传到下一个过滤器，如果没有过滤器则传到被调用者
+chain.doFilter(request, response);
+}
+
+@Override
+publicvoid init(FilterConfig arg0) throws ServletException {
+}
+}
+过滤器类还需要在web.xml中进行配置，设定要过滤哪些请求。过滤器在web.xml中的配置如清单附C-6所示。
+清单附C-6 web.xml片段
+<filter>
+<filter-name>SetCharacterEncoding</filter-name>
+<filter-class>chapc.SetCharacterEncoding</filter-class>
+</filter>
+<filter-mapping>
+<filter-name>SetCharacterEncoding</filter-name>
+<url-pattern>/*</url-pattern>
+</filter-mapping>
