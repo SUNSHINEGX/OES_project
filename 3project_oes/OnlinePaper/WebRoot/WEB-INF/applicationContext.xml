@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- operator相关dao ,service,action的Bean 注册及依赖关系注册 -->
+	<bean id="optDAOInterfaceSrc" class="com.online.dao.OperatorDAO">
+	</bean>
+	<bean id="studDAOInterfaceSrc"
+		class="com.online.dao.StudentinfoDAO">
+	</bean>
+	<bean id="registSrvSrc"
+		class="com.online.service.RegistServiceImpl">
+		<property name="optDAOInterface" ref="optDAOInterfaceSrc"></property>
+		<property name="studentInfoDAOInterface"
+			ref="studDAOInterfaceSrc">
+		</property>
+	</bean>
+
+	<bean id="registActionRefrence"
+		class="com.online.action.RegistAction" scope="prototype">
+		<property name="registServ" ref="registSrvSrc"></property>
+	</bean>
+
+	<!-- question相关dao,service,action的Bean及相关依赖关系注册 -->
+	<bean id="qesDAOInterfaceSrc" class="com.online.dao.QuestionDAO">
+	</bean>
+	<bean id="questSrvSrc"
+		class="com.online.service.QuestionServiceImpl">
+		<property name="qesInterface" ref="qesDAOInterfaceSrc"></property>
+	</bean>
+
+	<bean id="questionActionRefrence"
+		class="com.online.action.QuestionAction" scope="prototype">
+		<property name="questionServ" ref="questSrvSrc"></property>
+	</bean>
+
+	<!-- paper相关dao,service,action的Bean及相关依赖关系注册 -->
+	<bean id="papDAOInterfaceSrc" class="com.online.dao.PaperDAO">
+	</bean>
+	<bean id="papDetailDAOInterfaceSrc"
+		class="com.online.dao.PaperdetailDAO">
+	</bean>
+
+	<bean id="paperSrvSrc"
+		class="com.online.service.PaperServiceImpl">
+		<property name="paperInterface" ref="papDAOInterfaceSrc"></property>
+		<property name="paperdetailInterface"
+			ref="papDetailDAOInterfaceSrc">
+		</property>
+
+	</bean>
+
+	<bean id="paperActionRefrence" class="com.online.action.PaperAction"
+		scope="prototype">
+		<property name="paperServ" ref="paperSrvSrc"></property>
+	</bean>
+
+	<!-- studScore相关dao,service,action的Bean及相关依赖关系注册 -->
+	<bean id="studScoreDAOInterfaceSrc"
+		class="com.online.dao.StudscoreDAO">
+	</bean>
+	<bean id="studScoreSrvSrc"
+		class="com.online.service.StudScoreServiceImpl">
+		<property name="studScoreInterface"
+			ref="studScoreDAOInterfaceSrc">
+		</property>
+	</bean>
+	<bean id="studScoreActionRefrence"
+		class="com.online.action.StudScoreAction" scope="prototype">
+		<property name="studScoreServ" ref="studScoreSrvSrc"></property>
+		<property name="paperServ" ref="paperSrvSrc"></property>
+		<property name="registServ" ref="registSrvSrc"></property>
+	</bean>
+</beans>

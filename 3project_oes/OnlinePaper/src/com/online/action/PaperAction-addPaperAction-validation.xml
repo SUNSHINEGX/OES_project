@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+	"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+
+<validators>
+    <field name="paperName">
+        <field-validator type="requiredstring">
+            <message key="paperName.required"/>
+        </field-validator>
+    </field>
+    <field name="byUser">
+        <field-validator type="requiredstring">
+            <message key="byUser.required" />
+        </field-validator>
+    </field>
+    <field name="fullScore">
+        <field-validator type="required">
+            <message key="fullScore.required" />
+        </field-validator>
+        <field-validator type="int">
+            <param name="min">1</param>
+            <param name="max">150</param>
+            <message>分值范围必须在${min}和${max}之间</message>
+        </field-validator>
+    </field>
+</validators>

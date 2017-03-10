@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+	<HEAD>
+		<TITLE>JAVASCRIPT弹出DIV层窗口实例</TITLE>
+		<META http-equiv=Content-Type content="text/html; charset=utf-8">
+		<style>
+#popupcontent {
+	position: absolute;
+	visibility: hidden;
+	overflow: hidden;
+	border: 1px solid #CCC;
+	background-color: #F9F9F9;
+	border: 1px solid #333;
+	padding: 5px;
+}
+</style>
+
+<script> 
+  var baseText = null; 
+  function showPopup(w,h)
+    { var popUp = document.getElementById("popupcontent");
+     popUp.style.top = "200px"; 
+     popUp.style.left = "200px";
+     popUp.style.width = w + "px"; 
+     popUp.style.height = h + "px"; 
+     if (baseText == null) baseText = popUp.innerHTML; 
+     popUp.innerHTML = baseText + "<div id=\"statusbar\"><input type=\"button\" value=\"Close window\" onClick=\"hidePopup();\"></div>"; 
+     var sbar = document.getElementById("statusbar"); 
+     sbar.style.marginTop = (parseInt(h)-60) + "px"; 
+     popUp.style.visibility = "visible";} 
+     
+   function hidePopup()
+      { var popUp = document.getElementById("popupcontent"); 
+      popUp.style.visibility = "hidden";
+      } 
+  </script>
+      
+		<META content="MSHTML 6.00.2900.2838" name=GENERATOR>
+	</HEAD>
+	<BODY>
+		<div id="popupcontent">
+			这是一个DIV弹窗效果!
+		</div>
+		<p>
+			<a href="#">将鼠标移动到此</a>
+		<p>
+		<p>
+			<a href="#">点击这里查看弹出窗口</a>
+		</p>
+	</BODY>
+</HTML>

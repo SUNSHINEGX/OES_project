@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="gbk"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       
+      <bean name="daoTemplate" abstract="true">
+         <property name="sessionFactory" ref="sessionFactory"/>
+      </bean>
+      <bean name="AdminDao" class="org.matrix.dao.impl.AdminDaoImpl" parent="daoTemplate"/>
+      
+      <bean name="ExamTypeDao" class="org.matrix.dao.impl.ExamTypeDaoImpl" parent="daoTemplate"/>
+      
+      <bean name="StudentDao" class="org.matrix.dao.impl.StudentDaoImpl" parent="daoTemplate"/>
+        
+      <bean name="QuestionDao" class="org.matrix.dao.impl.QuestionDaoImpl" parent="daoTemplate"/>
+      </beans>

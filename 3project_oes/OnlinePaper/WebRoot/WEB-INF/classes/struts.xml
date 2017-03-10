@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="petstore" extends="struts-default">
+ 		<!-- 自定义拦截器 -->
+ 		<interceptors>
+			<interceptor name="TransInterceptor" class="com.online.interceptor.TransInterceptor">
+				<param name="name">数据库事务控制拦截器</param>
+			</interceptor>
+			<!-- 还可以继续定义自已的拦截器 -->
+		</interceptors>
+
+		<!-- operator相关action -->
+		 <action name="validateOperatorAction" class="registActionRefrence" method="validateLogin">
+            <result name="input">/login.jsp</result>
+            <result name="main">/Main.jsp</result>
+		</action>
+        <action name="addOperatorAction" class="registActionRefrence" method="addOperator">
+            <result name="input">/addAccount.jsp</result>
+            <result name="goList" type="redirect-action">
+               <param name="actionName">listOperatorAction</param>
+            </result>
+            <interceptor-ref name="defaultStack" />
+			<interceptor-ref name="TransInterceptor">
+				<param name="name">数据库事务控制拦截器</param>  
+			</interceptor-ref>
+        </action>
+        <action name="deleteOperatorAction" class="registActionRefrence" method="deleteOperator">
+            <result name="goList" type="redirect-action">
+               <param name="actionName">listOperatorAction</param>
+            </result>
+            <interceptor-ref name="defaultStack" />
+			<interceptor-ref name="TransInterceptor">
+				<param name="name">数据库事务控制拦截器</param>  
+			</interceptor-ref>
+        </action>
+        <action name="listOperatorAction" class="registActionRefrence" method="queryStudentInfoList">
+            <result name="list">/accountMaintience.jsp</result>  
+        </action>
+        <action name="displayStudentInfoAction" class="registActionRefrence" method="getStudentInfoBean">
+            <result name="beanInfo">/ShowStudentInfo.jsp</result>
+        </action>
+        
+        
+        <!-- question相关的action -->
+        <action name="addQuestionAction" class="questionActionRefrence" method="addQuestion">
+            <result name="input">/addQuestion.jsp</result>
+            <result name="goList" type="redirect-action">
+               <param name="actionName">listQuestionAction</param>
+            </result>
+            <interceptor-ref name="defaultStack" />
+			<interceptor-ref name="TransInterceptor">
+				<param name="name">数据库事务控制拦截器</param>  
+			</interceptor-ref>
+        </action>
+        <action name="deleteQuestionAction" class="questionActionRefrence" method="deleteQuestion">
+            <result name="goList" type="redirect-action">
+               <param name="actionName">listQuestionAction</param>
+            </result>
+            <interceptor-ref name="defaultStack" />
+			<interceptor-ref name="TransInterceptor">
+				<param name="name">数据库事务控制拦截器</param>  
+			</interceptor-ref>
+        </action>
+        <action name="listQuestionAction" class="questionActionRefrence" method="queryQuestionList">
+            <result name="list">/questionMaintience.jsp</result>  
+        </action>
+
+        <action name="listQuestionForPaperAction" class="questionActionRefrence" method="queryQuestionForPaperList">
+            <result name="listForpaper">/QuetListForPaper.jsp</result>  
+        </action>
+
+        <action name="displayQuestionInfoAction" class="questionActionRefrence" method="getQuestionBean">
+            <result name="beanInfo">/ShowQuestion.jsp</result>
+        </action>
+        
+        <!-- Paper相关的Action -->
+        <action name="addPaperAction" class="paperActionRefrence" method="addPaper">
+            <result name="input">/addPaper.jsp</result>
+            <result name="goList" type="redirect-action">
+               <param name="actionName">listPaperAction</param>
+            </result>
+            <interceptor-ref name="defaultStack" />
+			<interceptor-ref name="TransInterceptor">
+				<param name="name">数据库事务控制拦截器</param>  
+			</interceptor-ref>
+        </action>
+        <action name="deletePaperAction" class="paperActionRefrence" method="deletePaper">
+            <result name="goList" type="redirect-action">
+               <param name="actionName">listPaperAction</param>
+            </result>
+            <interceptor-ref name="defaultStack" />
+			<interceptor-ref name="TransInterceptor">
+				<param name="name">数据库事务控制拦截器</param>  
+			</interceptor-ref>
+        </action>
+        <action name="listPaperAction" class="paperActionRefrence" method="queryPaperList">
+            <result name="list">/paperMaintience.jsp</result>  
+        </action>
+        <action name="listPaperForScoreAction" class="paperActionRefrence" method="queryPaperForScoreList">
+            <result name="list">/paperForScoreMaintience.jsp</result>  
+        </action>
+
+        <action name="chooseQestToPaperAction" class="paperActionRefrence" method="chooseQesToPaper">
+            <result name="choosePage">/QuetListForPaper.jsp</result>  
+        </action>
+
+        <action name="choosePaperToQestAction" class="paperActionRefrence" method="choosePaperToQes">
+            <result name="choosePage">/QuetListForPaper.jsp</result>  
+        </action>
+        
+        <action name="displayPaperAction" class="paperActionRefrence" method="getPaperBean">
+            <result name="beanInfo">/ShowPaper.jsp</result>
+        </action>        
+
+        <action name="displayPaperForScoreAction" class="paperActionRefrence" method="getPaperForScoreBean">
+            <result name="beanInfo">/addStudScore.jsp</result>
+        </action>        
+
+       <!-- StudScore相关的Action -->
+       <action name="addStudScoreAction" class="studScoreActionRefrence"
+       	method="addStudScore">
+       	<result name="input">/addStudScore.jsp</result>
+       	<result name="goList" type="redirect-action">
+       		<param name="actionName">listStudScoreAction</param>
+       	</result>
+       	<interceptor-ref name="defaultStack" />
+       	<interceptor-ref name="TransInterceptor">
+       		<param name="name">数据库事务控制拦截器</param>
+       	</interceptor-ref>
+       </action>
+       <action name="listStudScoreAction" class="studScoreActionRefrence" method="queryStudScoreList">
+            <result name="list">/studScoreMaintience.jsp</result>  
+        </action>
+        <action name="displayStudScoreAction" class="studScoreActionRefrence" method="getStudScoreBean">
+            <result name="beanInfo">/ShowStudScore.jsp</result>
+        </action>        
+    </package>
+</struts>

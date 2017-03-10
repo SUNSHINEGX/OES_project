@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="OnlinePaper"
+  id="myeclipse.1348579321980"
+  context-root="/OnlinePaper"
+  j2ee-spec="5.0"
+  archive="OnlinePaper.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

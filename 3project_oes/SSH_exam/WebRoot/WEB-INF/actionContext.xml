@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean name="actionTemplate" abstract="true">
+		<property name="examService" ref="examService"/>
+	</bean>
+
+	<!-- 处理管理员登录 -->
+	<bean name="/adminLogin" class="org.matrix.action.AdminLoginAction" scope="prototype" parent="actionTemplate"/>
+	<!-- 处理添加学生 -->
+	<bean name="/processAddStudent" class="org.matrix.action.AddStudentAction" scope="prototype" parent="actionTemplate"/>
+	<!-- 处理列出学生 -->
+	<bean name="/listStudent" class="org.matrix.action.ListStudentAction" scope="prototype" parent="actionTemplate"/>
+	<!-- 处理删除学生 -->
+	<bean name="/delStudent" class="org.matrix.action.DelStudentAction" scope="prototype" parent="actionTemplate"/>
+	<!-- 处理添加考试类型 -->
+	<bean name="/processAddTest" class="org.matrix.action.AddTestAction" scope="prototype" parent="actionTemplate"/>
+	<!-- 进入添加试题的表单页 -->
+	<bean name="/addQuestion" class="org.matrix.action.BeforeAddQuestionAction" scope="prototype" parent="actionTemplate"/>
+	<!-- 处理列出学生 -->
+	<bean name="/listQuestion" class="org.matrix.action.ListQuestionAction" scope="prototype" parent="actionTemplate"/>
+	<!-- 处理删除试题 -->
+	<bean name="/delQuestion" class="org.matrix.action.DelQuestionAction" scope="prototype" parent="actionTemplate"/>
+	<!-- 处理添加试题 -->
+	<bean name="/processAddQuestion" class="org.matrix.action.AddQuestionAction" scope="prototype" parent="actionTemplate"/>
+	<!-- 处理学生登录 -->
+	<bean name="/processLogin" class="org.matrix.action.StudentLoginAction" scope="prototype" parent="actionTemplate"/>
+	<!-- 学生准备考试 -->
+	<bean name="/prepare" class="org.matrix.action.PrepareAction" scope="prototype" parent="actionTemplate"/>
+	<!-- 学生开始考试 -->
+	<bean name="/begin" class="org.matrix.action.BeginAction" scope="prototype" parent="actionTemplate"/>
+	<!-- 学生答题 -->
+	<bean name="/reply" class="org.matrix.action.ReplyAction" scope="prototype" parent="actionTemplate"/>
+	<!-- 考试结束 -->
+	<bean name="/finish" class="org.matrix.action.FinishAction" scope="prototype" parent="actionTemplate"/>
+
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+	    <property name="beanNames">
+            <list>
+                <value>/processAddStudent</value>
+                <value>/listStudent</value>
+                <value>/delStudent</value>
+                <value>/processAddTest</value>
+                <value>/addQuestion</value>
+                <value>/delQuestion</value>
+                <value>/processAddQuestion</value>
+            </list>
+	    </property>
+        <property name="interceptorNames">
+            <list>
+                <value>authorityInterceptor</value> 
+            </list>
+        </property>
+    </bean>
+
+	<bean id="authorityInterceptor" class="org.matrix.action.authority.AuthorityInterceptor"/>
+
+    <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+	    <property name="beanNames">
+            <list>
+                <value>/reply</value>
+                <value>/finish</value>
+            </list>
+	    </property>
+        <property name="interceptorNames">
+            <list>
+                <value>examInterceptor</value> 
+            </list>
+        </property>
+    </bean>
+
+	<bean id="examInterceptor" class="org.matrix.action.authority.ExamInterceptor"/>
+</beans>
+

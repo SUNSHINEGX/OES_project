@@ -1,0 +1,22 @@
+#
+#Sat Dec 13 16:02:58 CST 2003
+genBasicCompId=false
+sessionFactoryName=
+profile=
+daoSFId=sessionFactory
+version=3.2
+jndiPath=
+detectM2M=false
+reStrategyClass=
+springDaoFile=src/org/matrix/conf/applicationContext.xml
+useJavaTypes=true
+keyGenerator=native
+libInstallFolder=WebRoot/WEB-INF/lib
+addLibs2Project=true
+genVersionTag=false
+sessionFactoryId=sessionFactory
+basePersistenceClass=
+reSettingsFile=/SSH_exam/hibernate.reveng.xml
+configFile=/SSH_exam/src/org/matrix/conf/applicationContext.xml
+createConfigFile=false
+addLibs2Classpath=true

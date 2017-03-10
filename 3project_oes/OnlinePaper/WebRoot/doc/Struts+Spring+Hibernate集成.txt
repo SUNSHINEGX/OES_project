@@ -1,0 +1,242 @@
+Struts+Spring+Hibernate集成2009-06-17 07:54
+
+目前比较流行MVC架构有Struts、Spring、WebWork、JSF，Struts是一个基于Sun J2EE平台的MVC框架，主要是采用Servlet和JSP技术来实现的。由于Struts能充分满足应用开发的需求，简单易用，敏捷迅速，在过去一直颇受关注。Spring提供了管理业务对象的一致方法并且鼓励了注入对接口编程而不是对类编程的良好习惯。Spring的架构基础是基于使用JavaBean属性的Inversion of Control容器。Spring提供了唯一的数据访问抽象，包括简单和有效率的JDBC框架，极大的改进了效率并且减少了可能的错误。Spring的数据访问架构还集成了Hibernate和其他O/R mapping解决方案。WebWork、JSF在此就不介绍，有兴趣可以到google搜索相关的文章。
+
+
+目前比较流行的O/R mapping框架有Hibernate、IBatis，Hibernate是一个开放源代码的对象关系映射框架，它对JDBC进行了非常轻量级的对象封装，使得我们可以随心所欲的使用对象编程思维来操纵数据库。
+
+Struts+Spring+Hibernate+Aglets集成架构图
+
+如何将Struts、Spring、Hibernate集成一起使用，并充分使用他们各自长处呢？接下来我对Struts+Spring+Hibernate集成的分层作分析和如何实现集成Strust+Spring+Hibernate作一下介绍。
+从上图知服务器端web应用程序共分五层：表示层(view)、控制层(controller)、业务层(business)、DAO层(Data Access Object)、持久层(persistence)+RMI。每个层在处理程序上都有一项明确的责任,不应该在功能上与其它层混合，并且每个层要与其它层分开的，所以需要设计他们之间通信接口。
+从介绍各个层开始，讨论一下这些层担当的任务和各层的功能以及它们的相互关系。
+
+
+一、 表示层：
+视图是用户看到并与之交互的界面，视图向用户显示相关的数据，并能接收用户的输入数据，但不能进行任何实际的业务处理。视图可以向业务层查询业务状态，但不能改变业务层，视图还可以接受模型发出的数据更新事件，从而对用户界面进行同步更新。视图其实就是一组JSP文件，在这些JSP文件中没有业务逻辑，也没有业务层信息，只有标签，这些标签可以是标准的JSP标签或客户化标签，如Struts标签库中的标签。
+由架构图可知，把Struts框架中的ActionForm Bean分到了表示层中，ActionForm Bean也是一种JavaBean,除了具有一些JavaBean的常规方法，还包含一些特殊的方法，用于验证HTML表单数据以及将其属性重新设置为默认值。Struts框架利用ActionForm Bean来进行视图和控制器之间表单数据之间表单数据的传递
+Struts框架把用户输入的表单数据保存在ActionForm Bean中，把它传递给控制器Action，Action可以对ActionForm Bean中数据进行修改，JSP文件使用Struts标签读取修改后的ActionForm Bean中的信息，重新设置HTML表单。
+
+
+二、 控制层：
+控制层中的控制器Action接受用户的输入并调用业务层的业务方法和表示层的组件去完成用户的需求。当Web用户单击Web页面中的提交按钮来发送HTML表单时，控制器接收请求并调用相应的业务层方法去处理请求，然后调用相应的视图来显示业务层返回的数据。
+
+Struts中的控制器由ActionServlet类和Action类来实现，ActionServlet主要负责接收HTTP请求信息，根据配置文件struts-config.xml的配置信息，把请求转发给适当的Action对象。如果该Action对象不存在，ActionServlet会先创建这个Action对象，Action充当用户请求和业务逻辑处理之间的适配器，其功能是将请求与业务逻辑分开，Action根据用户请求调用相关的业务逻辑组件，业务逻辑由Spring的IoC、AOP、DAO、ORM来完成，Action类侧重于控制应用程序的流程，而不是实现应用程序的逻辑。为了使用Action中使用到Spring受管理JavaBean、IoC、AOP来调用Spring的业务逻辑、事务管理、安全性服务。Spring对Struts提供了这种集成服务，通过org.springframework.web.struts.DelegatingRequestProcessor类充当Action的代理，将Struts Action配置在Spring ApplicationContext中，而且Action不必继承于ActionSuport，每次客户请求Struts Action时，DelegatingRequestProcessor将充当代理的作用，即通过它将Action请求转发给Spring IoC容器进行处理。通过这样的方式，Spring 获得了对Action 实例的管理权，它将对Action进行调度，并为Struts提供所需的Action实例。既然Action已经由Spring全权接管，那么就可以将此Action看作是Spring中的一个Bean，它可享受Spring提供的所有服务（依赖注入、实例管理、事务管理等）。  
+
+三、 业务层：
+业务层应该和表示层以及控制层之间保持独立，在本集成分层框架中，位于上层的表示层和控制层依赖于下层的业务层的实现，而下层业务层不应该依赖于上层的表示层和控制器的实现。业务层提供了处理应用程序的业务逻辑和业务校验，如验证用户登陆系统的密码是否正确；提供了管理事务，允许与其它层相互作用的接口，如使用Spring的管理事务Bean和DAO层的DAO接口类以及给Action提供业务接口。业务层还提供了管理业务层级别的对象的依赖、管理程序的执行（从业务层到持久层）等。
+
+四、DAO层：
+DAO提供了访问关系型数据库所需要的所有操作的接口，其中包括创建数据库、定义表、字段和索引，建立表间的关系，更新和查询数据库等，DAO将底层数据（Hibernate持久对象）访问操作和业务层(business层)逻辑分离开，对业务层（business层）提供面向对象的数据访问接口。而业务层（business层）调用DAO接口实现各种业务方法，如验证用户密码是否正确业务方法，并向控制层（Action类）提供调用业务方法的接口。
+
+
+五、持久层：
+由集成图可看出，Web应用的另一个末端是持久层Hibernate，Hibernate是一个ORM工具，没有Hibernate时，通常使用JDBC来连接数据库，并利用连接池来改善性能，利用事务服务来保证可靠性，还会利用JNDI来传递数据源，配合SQL语言来完成数据库的查询操作。但Hibernate可以复杂性的JDBC过程以对象系统映射的方式对开发者透明，将需要经验和技巧的设计部分封装在PO对象和XML映射文件的配置中。使用了Hibernate应用程序就不需发直接面对JDBC代码，由PO对象和Hibernate的API来取代。Hibernate利用hibernate.cfg.xml或hibernate.properties文件来配置Hibernate所使用的包括数据库和连接池等在内的资源，Hibernate利用*.hbm.xml来描述POJO和数据库资源的映射关系。
+
+
+六、RMI
+Spring提供类用于集成各种远程访问技术，对远程访问的支持可以降低在用POJO实现支持远程访问业务时的开发难度。Spring提供了对远程方法调用(RMI)的支持，借助于Spring提供的RmiProxyFactoryBean和RmiServiceExporter可以开发RMI应用。RMI服务器集成了Aglets的运行环境AgletContext，并实现了Agent相关业务方法，由业务层通过RMI的业务接口DAO来完成Agent相关的业务。
+
+
+七、集成实现 
+7.1 Spring集成Struts
+Struts是基于MVC的，它实现了Model2模型的Web应用框架，Struts框架的核心作用其提供的灵活的控制层，它是基于Java Servlet、JavaBean、ResourceBundle、XML等技术构建的。
+Spring对Struts提供了两种集成方式：
+
+一是通过org.springframework.web.context.ContxtLoaderServlet来初始化Spring ApplicationContext的，Spring为了集成Struts，专门提供了org.springframework.web.struts包，为了初始化Spring ApplicationContext,需要在struts-config.xml中配置如下内容：
+  <plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+<set-propertyproperty="contextConfigLocation" value="/WEB-INF/applicationContext.xml"/>
+  </plug-in>  
+
+二是通过org.springframework.web.struts.DelegatingRequestProcessor类充当Action的代理，将Struts Action配置在Spring ApplicationContext中，而且Action不必继承于ActionSuport，每次客户请求Struts Action时，DelegatingRequestProcessor将充当代理的作用，即通过它将Action请求转发给Spring IoC容器进行处理。Action将可以使用到Spring IoC容器的功能。具体使用步骤如下：
+
+在struts-config.xml中配置DelegatingRequestProcessor。
+<action path =”/comstomerRegister.do”
+type=” org.springframework.web.struts.DelegatingRequestProcessor”/>
+其次在Spring配置文件applicationContext.xml中定义名字”/customerRegister.do”的受管JavaBean。
+<bean 
+name=” /vipService” class=” com.hour41.hr.struts.action.VipUseAction”/>
+
+如此一来，Struts 在运行期加载的实际上是DelegatingActionProxy ， 而DelegatingActionProxy则实现了针对实际Action的调用代理，Struts最终调用的将是由Spring管理的Action实例。通过这样的方式，Spring 获得了对Action 实例的管理权，它将对Action进行调度，并为Struts提供所需的Action实例。既然Action已经由Spring全权接管，那么就可以将此Action看作是Spring中的一个Bean，它可享受Spring提供的所有服务（依赖注入、实例管理、事务管理等）。
+
+7.2 Spring集成Hibernate
+Hibernate提供了O/R Mapping功能，通过XML配置文件能够将对象映射到RDBMS，开发Hibernate需要如下内容：
+Hibernate配置文件。一般可以通过两种方式进行。一是提供hibernate.cfg.xml文件，用于创建Hibernate SessionFactory。二是提供hibernate.properties文件。
+Hibernate映射文件。如Vip.hbm.xml
+POJO类源文件。如com.hour41.vo.user.Vip.java。
+Spring对Hibernate的集成提供了定义Hibernate资源、对Hibernate资源的依赖注
+入。定义Hibernate资源：可以通过在Spring配置文件中定义sessionFactory是给出Hibernate映射文件的定义。如本系统的sessionFactory定义如下：
+
+<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+  <property name="driverClassName">
+    <value> com.mysql.jdbc.Driver</value>
+  </property>
+  <property name="url">
+    <value>jdbc:mysql://192.168.1.200:3306/hour41</value>
+  </property>
+  <property name="username">
+    <value>root</value>
+  </property>
+  <property name="password">
+    <value>123456</value>
+  </property>
+</bean>
+
+<bean 
+id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+  <property name="dataSource">
+    <ref local="dataSource" />
+  </property>
+  <property name="mappingResources">
+    <list>
+              <value>com/hour41/vo/common/City.hbm.xml</value>
+    </list>  
+  </property>  
+  <property name="hibernateProperties">
+    <props>
+      <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+      <prop key="hibernate.show_sql">true</prop>
+    </props>
+  </property>
+</bean>
+
+Spring DAO Hibernate抽象提供了HibernateTemplate，HibernateTemplate充分利用了Spring IoC特征，从而实现了对Hibernate资源的依赖注入。如果应用只是用Spring IoC,则只需要在Spring配置文件中为它提供sessionFactory。如上配置文件。
+
+7.3 Spring对Aglets集成
+由于通过远程RMI服务器集成Aglet的运行环境AgletContext，所以我们只要将RMI服务集成到Spring中，并将RMI服务接口IAgentDAO作为Spring中的一个Bean，它可享受Spring提供的所有服务（依赖注入、实例管理、事务管理等）。
+
+Spring提供类用于集成各种远程访问技术，对远程访问的支持可以降低在用POJO实现支持远程访问业务时的开发难度。Spring提供了对远程方法调用(RMI)的支持，借助于Spring提供的RmiProxyFactoryBean和RmiServiceExporter可以开发RMI应用。Spring同时支持两种方式开发RMI应用，一是基于传统的方式，即同java.rmi.Remote和java.rmi.RemoteExcpetion配合使用；二是基于RMI Invoker，通过使用RmiProxyFactoryBean和RmiServiceExporter。本系统将采用RMI Invoker方式，下面介绍开发步骤：
+
+通常，开发RMI应用的步骤如下：
+
+开发继承于java.rmi.Remote业务接口类。需要在每个业务方法的签名中抛出java.rmi..RemoteException。
+
+实现业务接口类。在实现业务接口类过程中，除了需要实现业务接口类外，还需要继承于java.rmi.server.UnicastRemoteObject。
+
+开发RMI服务器代码，将远程服务注册到RMI注册器（registry）中。需要借助于Naming提供的绑定操作，从而供客户调用。
+
+开发客户端代码。借助于Naming.lookup()方法能够查找到所需的远程服务，并且调用它。
+借助于rmic实用工具，编译存根（stub）。
+
+启动RMI注册器，即通过start rmiregistry命令行完成RMI注册器的启动。
+
+启动RMI服务器代码，从而能够导出远程服务，注册到RMI注册器中。
+
+运行客户端应用程序。
+
+由上可以看出，开发RMI应用服务的步骤比较烦琐。借助于Spring提供的代理工厂JavaBean，依据RMI开发模型开发RMI应用变得相当简单，下面介绍RMI Invoker方式开发RMI服务：
+开发IAgentDAO接口，供导出远程服务使用。IAgentDAO业务接口中的方法并没有抛出java.rmi.RemoteException异常，还有IAgentDAO也没有继承于java.remote.Remote，Spring借助于代理工厂JavaBean和RMIServerExporter能够消除业务接口中的这方面需要。接口代码如下：
+
+package com.hour41.spring.rmi.dao;
+public interface IAgentDAO {
+        public void createAglet(String agletPath); 
+}
+
+实现IAgentDAO接口。根据IAgentDAO.java接口，完成AgentDAO类的开发：
+package com. hour41.spring.rmi.dao;
+import com.ibm.aglet.*;
+import java.net.*;
+public class AgentDAO implements IAgentDAO {
+        private static AgletContext cxt = null;
+
+  public AgentDAO(String port, String userName, String password) {
+      cxt = AgentContext.getAgletContext(port, userName, password);
+}
+
+        public void createAglet(String agletPath) {
+      try {
+        URL codebase = new URL("File:/" + agletPath);
+        cxt.createAglet(codebase, "aglettest.MainAglet", null);
+          } catch (Exception e) {
+        e.printStackTrace();
+        }
+}
+}
+
+通过上述过程，整个RMI远程服务的Java代码开发完成。Spring能够将任何POJO导出成RMI远程服务，同RMI编程模型相关的内容都是通过Spring配置文件完成。
+配置RMI服务端使用的Spring配置文件，即appcontextrmiserver.xml。
+
+  <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+  "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+<bean id="agentDAO" class="com. hour41.spring.rmi.dao.AgentDAO">
+  <constructor-arg>
+  <value>4000</value><!—- AgletContext使用的端口号 -->
+  </constructor-arg>
+  <constructor-arg>
+  <value>dengddq</value><!—- 登陆AgletContext的用户名 -->
+  </constructor-arg>
+  <constructor-arg>
+  <value>820424</value><!—- 登陆AgletContext的密码 -->
+  </constructor-arg>
+</bean>
+
+<bean id="logAgentService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+  <!-- RmiServiceExporter对服务名没有特殊要求 -->
+  <property name="serviceName">
+    <value>LogAgentDAO</value>
+  </property>
+  <property name="service">
+    <ref bean="agentDAO" />
+  </property>
+  <property name="serviceInterface">
+    <value>com. hour41.spring.rmi.dao.IAgentDAO</value>
+  </property>
+  <!-- 避免与默认RMI注册端口冲突，因此修改为1200 -->
+  <property name="registryPort">
+    <value>1200</value>
+  </property>
+</bean>
+</beans>
+
+
+借助于RmiServiceExporter，不用直接使用rmic生成存根、不用通过程序手工将远程服务注册到RMI注册器中。RmiServiceExporter为开发完成了这些繁琐的工作。通过serviceName属性能够指定RMI服务名，即对应于Naming绑定操作中的逻辑服务名；通过service属性能够指定提供业务逻辑的实现类，即AgentDAO；通过serviceInterface属性能够指定AgentDAO服务实现的接口，即客户将通过该接口同RMI远程程序(AgentDAO)进行交互；通过registryPort属性能够修改默认RMI注册端口。
+
+配置使用上述RMI远程服务，即供客户使用的Spring配置文件(appcontextrmiclient.xml)：
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+        "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+  <bean id="logAgentDAO" 
+    class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+  <property name="serviceUrl">
+<value>
+rmi://localhost:1200/LogAgentDAO
+</value>
+</property>
+  <property name="serviceInterface">
+<value>
+com. hour41.spring.rmi.dao.IAgentDAO
+</value>
+</property>
+  </bean> 
+</beans>
+
+由上配置文件可看到RmiProxyFactoryBean是工厂JavaBean，它是RMI远程服务代理，并能够捕捉到RemoteException，并将RemoteException转化为未受查的异常。通过serviceUrl属性能够指定RMI的URL；通过serviceInterface属性能够指定业务接口。
+
+开发提供RMI客户应用，即LogAgentDAORmiClient.java
+package com. hour41.spring.rmi.dao;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+public class LogAgentRmiClient {
+protected static final Log log = LogFactory.getLog
+(LogAgentRmiClient.class);
+    public static void main(String[] args) {
+        //初始化appcontextrmiclient.xml
+        Resource cresource = new ClassPathResource 
+("appcontextrmiclient.xml");
+        BeanFactory cfactory = new XmlBeanFactory(cresource);
+        //获得RMI服务
+        IAgentDAO clientLog = (IAgentDAO) cfactory.getBean
+("logAgentDAO");
+        //调用RMI服务
+        clientLog.createAglet("d:/test");
+    }
+}
+通过“logAgentDAO”逻辑名能够获得RMI服务，最终调用到RMI服务提供的实例方法createAglet()。

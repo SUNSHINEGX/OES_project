@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+	"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+
+<validators>
+    <field name="mainContent">
+        <field-validator type="requiredstring">
+            <message key="mainContent.required"/>
+        </field-validator>
+    </field>
+    <field name="easyLevel">
+        <field-validator type="requiredstring">
+            <message key="easyLevel.required" />
+        </field-validator>
+    </field>
+    <field name="answer">
+        <field-validator type="requiredstring">
+            <message key="answer.required" />
+        </field-validator>
+    </field>
+    <field name="score">
+        <field-validator type="required">
+            <message key="score.required" />
+        </field-validator>
+        <field-validator type="int">
+            <param name="min">1</param>
+            <param name="max">100</param>
+            <message>分值范围必须在${min}和${max}之间</message>
+        </field-validator>
+    </field>
+    <field name="optionA">
+        <field-validator type="requiredstring">
+            <message key="optionA.required" />
+        </field-validator>
+    </field>
+    <field name="optionB">
+        <field-validator type="requiredstring">
+            <message key="optionB.required" />
+        </field-validator>
+    </field>
+    <field name="optionC">
+        <field-validator type="requiredstring">
+            <message key="optionC.required" />
+        </field-validator>
+    </field>
+    <field name="optionD">
+        <field-validator type="requiredstring">
+            <message key="optionD.required" />
+        </field-validator>
+    </field>
+
+</validators>

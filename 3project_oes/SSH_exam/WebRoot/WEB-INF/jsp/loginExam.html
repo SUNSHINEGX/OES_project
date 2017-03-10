@@ -1,0 +1,18 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+ <HEAD>
+  <TITLE>loginExam</TITLE>
+  <script type="text/javascript">
+		function newWin(){
+			width=screen.width;
+			height=screen.height;
+			window.open("loginExam.do","_blank","left=0,top=0,width="+width+",height="+height+",toolbar=no,location=no,resizable");
+			window.parent.opener=null;
+			window.close();
+		}
+  </script>
+ </HEAD>
+
+ <BODY onload="newWin()">
+ </BODY>
+</HTML>

@@ -1,0 +1,121 @@
+body {
+	line-height: 1;
+	background:url(images/bg2.jpg) #63bad8 repeat-x 50% 0px;
+	text-align: center; padding-bottom: 0px; margin: 0px auto; padding-left: 0px; width: 840px; padding-right: 0px; font: 12px "lucida grande", lucida, helvetica, arial, sans-serif; color: #333333; padding-top: 0px
+}
+#wrappertop {
+	padding-bottom: 0px; margin-top: 20px; padding-left: 20px; width: 800px; padding-right: 20px; height: 20px; padding-top: 0px
+}
+#wrapper {
+	position: relative; padding-bottom: 0px; padding-left: 20px; width: 800px; padding-right: 20px; padding-top: 0px
+}
+#content {
+	text-align: left; background-color: #fff; width: 800px
+}
+#header {
+	border-bottom: #b2ccd0 1px solid; padding-bottom: 5px; padding-left: 20px; width: 780px; padding-right: 0px; background: #fff5a8; padding-top: 25px
+}
+h1 {
+	margin-top: 15px; width: 220px; display: inline
+}
+h2 {
+	display: inline;
+	font-family:"黑体";
+	font: bold 24px helvetica, arial, sans-serif;
+	color: #fff;
+	margin-left: 10px;
+	font-family: helvetica, arial, sans-serif;
+}
+#darkbanner {
+	position: relative; padding-bottom: 10px; margin: 20px 0px 0px -18px; padding-left: 40px; padding-right: 10px; background: #424242; padding-top: 8px;
+	width: 320px
+}
+#darkbannerwrap {
+	position: relative; margin: 0px 0px 20px -18px; width: 18px; background: url(images/aiwrap.png); height: 10px
+}
+.form button {
+	border: medium none;
+	width:100px;
+	height:26px;
+	display:block;
+	background:url(../images/bg_button3.jpg) top no-repeat;
+	text-indent:5px;
+	
+	color: #ffffff;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-style: normal;
+}
+button:hover {
+	background:url(../images/bg_button3.jpg) bottom no-repeat;
+}
+.buttons a:active {
+	clear: both;
+	display: block;
+	width: 100px;
+	height: 23px;
+	padding-top: 3px;
+}
+body#login {
+	width: 410px
+}
+body#login #wrappertop {
+	width: 370px
+}
+body#login #wrapperbottom {
+	width: 370px
+}
+body#login #wrapperbottom_branding {
+	padding-bottom: 0px; padding-left: 20px; width: 370px; padding-right: 20px; padding-top: 0px
+}
+body#login #wrapperbottom_branding_text {
+	padding-bottom: 10px; background-color: #fff; width: 370px; font: 11px "lucida grande", arial, sans-serif; color: #c0c0c0; padding-top: 3px;text-align:center;
+}
+body#login #loginError {
+  color: #FF0000
+}
+
+body#login #wrapper {
+	padding-bottom: 0px; padding-left: 20px; width: 370px; padding-right: 20px; padding-top: 0px
+}
+body#login #content {
+	width: 370px
+}
+body#login #header {
+	width: 350px
+}
+body#login fieldset {
+	border-bottom: 0px; border-left: 0px; background-color: #fff; margin: -30px 0px 0px; width: 330px; display: block; border-top: 0px; border-right: 0px; padding-top: 20px
+}
+body#login fieldset p {
+	color: #333333
+}
+body#login label {
+	text-align: right; width: 70px; float: left; font-weight: bold; margin-right: 10px; padding-top: 7px
+}
+body#login input {
+	padding-bottom: 3px; padding-left: 3px; width: 238px; padding-right: 3px; font: 16px "lucida grande", arial, sans-serif; margin-bottom: 15px; height: 20px; padding-top: 3px;
+}
+body#login input#radio{
+	height: 15px;
+	width: 15px;
+	margin-top: -20px;
+	}
+body#login .form button {
+	margin: 0px 3px 0px 80px; display: block; float: left; _margin-left: 42px
+}
+#forgottenpassword {
+	margin-top: 7px
+}
+#forgottenpassword a {
+	color: #333333
+}
+#forgottenpassword a:hover {
+	color: #104b67
+}
+#forgottenpassword li {
+	display: inline; margin-left: 10px
+}

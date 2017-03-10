@@ -1,0 +1,191 @@
+#Layer1 {
+	position:absolute;
+	width:777px;
+	height:55px;
+	z-index:1;
+	left: 20px;
+	top: 16px;
+}
+#Layer2 {
+	position:absolute;
+	width:180px;
+	height:300px;
+	z-index:2;
+	left: 18px;
+	top: 110px;
+	visibility: visible;
+	background-color: #FFFFCC;
+	overflow: visible;
+}
+#Layer3 {
+	position:absolute;
+	width:805px;
+	height:400px;
+	z-index:3;
+	left: 131px;
+	top: -18px;
+
+}
+.STYLE1 {font-size: 55px}
+.FORM_STYLE1 {
+	color: #0066FF;
+	font-weight: bold;
+	font-size: 16px;
+}
+#Layer4 {
+	position:absolute;
+	width:560px;
+	height:56px;
+	z-index:4;
+	left: 149px;
+	top: 10px;
+}
+#Layer5 {
+	position:absolute;
+	width:127px;
+	height:56px;
+	z-index:4;
+	left: 17px;
+	top: 8px;
+}
+#Layer6 {
+	position:absolute;
+	width:881px;
+	height:22px;
+	z-index:4;
+	left: 22px;
+	top: 410px;
+}
+
+#MTLayer1 {
+	position:absolute;
+	width:530px;
+	height:194px;
+	z-index:1;
+	left: 33px;
+	top: 33px;
+}
+#MTLayer2 {
+	position:absolute;
+	width:242px;
+	height:37px;
+	z-index:2;
+	left: 185px;
+	top: 43px;
+}
+.STYLE1 {font-size: 36px}
+#MTLayer3 {
+	position:absolute;
+	width:60px;
+	height:24px;
+	z-index:1;
+	left: 10px;
+	top:170px;
+}
+#MTLayer4 {
+	position:absolute;
+	width:530px;
+	height:49px;
+	z-index:1;
+	left: 32px;
+	top: 1px;
+}
+
+#Layer_AddReader {
+	position: absolute;
+	width: 550px;
+	height: 151px;
+	z-index: 1;
+	left: 10px;
+	top: 5px;
+}
+
+#PaperLayer1 {
+	position:absolute;
+	width:725px;
+	height:210px;
+	z-index:1;
+	left: 120px;
+	top: 250px;
+	overflow: scroll;
+}
+
+#TipLayer1 {
+	position:relative;
+	width:155px;
+	height:29px;
+	z-index:2;
+	left: 540px;
+	top: 29px;
+	background-color: #33FFFF;
+}
+#popupcontent{
+position:absolute;
+visibility: hidden;
+border:1px solid #CCC;
+background-color:#0066FF;
+border:1px solid #333;
+z-index:3;
+padding:5px;
+top: 15px;
+
+}
+
+#SelMTLayer1 {
+	position:absolute;
+	width:674px;
+	height:400px;
+	z-index:1;
+	left: 16px;
+	top: 3px;
+}
+#QestPaperLayer1 {
+	position:absolute;
+	width:330px;
+	height:194px;
+	z-index:1;
+	left: -1px;
+	top: -6px;
+}
+#QestPaperLayer2 {
+	position:absolute;
+	width:330px;
+	height:200px;
+	z-index:1;
+	left: 400px;
+	top:-6px;
+}
+#QestPaperLayer3 {
+	position:absolute;
+	width:73px;
+	height:195px;
+	z-index:1;
+	left: 295px;
+	top: -6px;
+}
+#StudScoreLayer1 {
+	position:absolute;
+	width:649px;
+	height:291px;
+	z-index:1;
+	left: 51px;
+	top: 23px;
+}
+#currentUser{
+ position:absolute;
+ font-size: 14px;
+ color: #339966;
+ height:35px;
+ left: 35px;
+ top: 90px; 
+ text-align:left;
+}
+
+.wwFormTable {}
+.label {font-style:italic; }
+.errorLabel {font-style:italic; color:red; }
+.errorMessage {font-weight:bold; text-align: center; color:red; }
+.checkboxLabel {}
+.checkboxErrorLabel {color:red; }
+.required {color:red;}
+.tdLabel {text-align:right; vertical-align:top; } 
