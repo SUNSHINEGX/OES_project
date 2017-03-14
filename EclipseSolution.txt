@@ -1,0 +1,38 @@
+http://www.cnblogs.com/lauer0246/p/5740572.html
+Java compiler level does not match解决方法
+从别的地方导入一个项目的时候,经常会遇到eclipse/Myeclipse报Description  Resource Path Location Type Java compiler level does not match the version of the installed Java project facet.出现这个问题的原因是因为,eclipse/myeclipse的jdk编译版本与出现问题的项目JDK编译版本不一致所导致!
+1. windows---proferences---java--compiler设置编译出来的文件使用的格式是 1.7版本的
+2.进入项目--properties---java Compiler 把项目编译版本也设置成 1.7
+3.进入项目--properties---Myeclipse---project Facets设置java文件的版本为 1.7，并打勾。
+
+相关错误处理：
+
+Unsupported major.minor version 51.0解决办法
+
+错误原因：用jdk7编译的class文件放到基于jdk6运行在tomcat之中，就会报这个错。
+
+ 解决方法：
+
+打开exclipse中项目上的属性—java compiler–选择一个合适的版本后重新编译即可。
+
+具体步骤
+
+解决：项目------>右键------>属性------>Java Compiler------>Compiler Compliance Level------>选择你使用的JDK版本------>应用。
+
+
+the import cannot be resolved错误的解决方法
+
+1、clean项目，重新编译项目。
+【解决】一般使用eclipse/myeclipse的菜单 project -> clean ..可以解决。同时最好选中Build Automatically选项。
+
+2、若是没有解决，不要着急，继续来。重新导入jar包。
+【解决】右键项目->build path -> Config build path -> Libraries-> remove后，重新导入。
+
+3、该项目有依赖项目需要重新导入依赖项目。
+【解决】右键项目->build path -> Config build path -> project -> remove后，重新导入。
+
+4、自动编译的class文件夹路径问题
+【解决】右键项目->build path -> Config build path -> source-> 在对话框的最下侧有个Default output file:选项，可以选择项目再eclipse/myeclipse中编译后的class文件的路径，一般web项目的路径为{ProjectName}/web(WebRoot)/WEB-INF/classes，非web项目一般为{ProjectName}/classes。
+
+5、问题还是存在的话，就超出这个问题的界限了，意思就是说可能就是其他的问题引起的错误。
+【解决】其实也不算是解决。具体是什么问题引起的可以打开Problems对话框窗口查看。
